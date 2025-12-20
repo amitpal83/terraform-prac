@@ -30,3 +30,11 @@ resource "aws_route_table_association" "demomodulePrivateRouteTableAssociation" 
   subnet_id      = element(aws_subnet.demomodulePrivateSubnet.*.id, count.index)
   route_table_id = aws_route_table.demomodulePrivateRouteTable.id
 }
+
+
+resource "aws_route" "demomodulePrivateRouteToNatGateway" {
+  count                  = var.env == "prod" ? 1 : 0
+  route_table_id         = aws_route_table.demomodulePrivateRouteTable.id
+  destination_cidr_block = "0.0.0.0/0"
+  nat_gateway_id         = var.aws_nat_gateway_id
+}  

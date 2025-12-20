@@ -5,4 +5,4 @@ variable "public_cidr_list" {}
 variable "private_cidr_list" {}
 variable "az" {}
 variable "env" {}
-  
+variable "aws_nat_gateway_id" {}

@@ -33,11 +33,11 @@ resource "aws_subnet" "dev_subnet3" {
 
 
 resource "aws_subnet" "demofunctionPublicSubnet" {
-  vpc_id     = aws_vpc.demo_vpc.id
-  count      = length(var.public_subnet_cidr_list)
-  cidr_block = element(var.public_subnet_cidr_list, count.index)
+  vpc_id                  = aws_vpc.demo_vpc.id
+  count                   = length(var.public_subnet_cidr_list)
+  cidr_block              = element(var.public_subnet_cidr_list, count.index)
   map_public_ip_on_launch = true
-  availability_zone = element(var.az, count.index)
+  availability_zone       = element(var.az, count.index)
   tags = {
     Name = "${aws_vpc.demo_vpc.tags["Name"]}-publicsubnet-${count.index + 1}"
   }
